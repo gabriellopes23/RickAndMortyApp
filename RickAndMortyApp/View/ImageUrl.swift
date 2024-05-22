@@ -1,18 +1,34 @@
-//
-//  ImageUrl.swift
-//  RickAndMortyApp
-//
-//  Created by Gabriel Lopes on 22/05/24.
-//
 
 import SwiftUI
 
 struct ImageUrl: View {
+    @StateObject var characterVM: CharacterViewModel = CharacterViewModel()
+    var imageUrl: String
+    var width: CGFloat
+    var height: CGFloat
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+           if let url = URL(string: imageUrl) {
+             AsyncImage(url: url) { phase in
+                 switch phase {
+                 case .empty:
+                     ProgressView()
+                 case .success(let image):
+                     image
+                         .resizable()
+                         .frame(width: width, height: height)
+                 case .failure:
+                     Image(systemName: "photo")
+                         .resizable()
+                         .frame(width: width, height: height)
+                 default:
+                     EmptyView()
+                 }
+             }
+         }
     }
 }
 
 #Preview {
-    ImageUrl()
+    ImageUrl(imageUrl: "https://rickandmortyapi.com/api/character/avatar/1.jpeg", width: 160, height: 200)
 }

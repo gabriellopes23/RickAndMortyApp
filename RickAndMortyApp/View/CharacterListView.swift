@@ -7,7 +7,7 @@ struct CharacterListView: View {
         GridItem(.adaptive(minimum: 400))
     ]
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVGrid(columns: columns) {
                 ForEach(characterVM.characterModel.results.indices, id: \.self) { i in
                     let result = characterVM.characterModel.results[i]
@@ -107,7 +107,7 @@ struct CharacterItemView: View {
     ZStack {
         grayBackgroundColor.ignoresSafeArea()
         
-        CharacterMainListView()
+        CharacterListView()
     }
     
 }

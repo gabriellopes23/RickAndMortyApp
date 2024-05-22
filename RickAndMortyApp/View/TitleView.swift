@@ -1,18 +1,22 @@
-//
-//  TitleView.swift
-//  RickAndMortyApp
-//
-//  Created by Gabriel Lopes on 22/05/24.
-//
 
 import SwiftUI
 
 struct TitleView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("Rick and Morty")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal)
     }
 }
 
 #Preview {
-    TitleView()
+    ZStack {
+        grayBackgroundColor.ignoresSafeArea()
+        
+        TitleView()
+    }
 }

@@ -1,8 +1,5 @@
-//
-//  UIScreenSize.swift
-//  RickAndMortyApp
-//
-//  Created by Gabriel Lopes on 22/05/24.
-//
 
-import Foundation
+import SwiftUI
+
+let widthSize = UIScreen.main.bounds.width
+let heightSize = UIScreen.main.bounds.height

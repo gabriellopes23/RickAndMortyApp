@@ -1,8 +1,6 @@
-//
-//  Color Constants.swift
-//  RickAndMortyApp
-//
-//  Created by Gabriel Lopes on 22/05/24.
-//
 
 import Foundation
+import SwiftUI
+
+let rowColorList = Color("RowColorList")
+let grayBackgroundColor = Color("GrayBackgoundColor")

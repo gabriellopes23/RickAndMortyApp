@@ -1,6 +1,7 @@
 
 import Foundation
 
+@MainActor
 class CharacterViewModel: ObservableObject {
     @Published var characterModel: CharacterModel = CharacterModel.defaultCharacterModel()
     

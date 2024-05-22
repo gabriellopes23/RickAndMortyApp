@@ -3,6 +3,7 @@ import Foundation
 
 class LocationViewModel: ObservableObject {
     @Published var locationModel: LocationModel = LocationModel.defaultLocationModel()
+    @Published var residents: [Character] = []
     
     func getLocation() {
         let urlString = "https://rickandmortyapi.com/api/location"
