@@ -13,7 +13,7 @@ struct CharacterListView: View {
                     let result = characterVM.characterModel.results[i]
                     
                     NavigationLink(destination: {
-                        CharacterItemView(characterVM: characterVM, name: result.name, imageUrl: result.image, status: result.species, species: result.species, gender: result.gender, origin: result.origin.name, location: result.location.name)
+                        CharacterItemView(characterVM: characterVM, name: result.name, imageUrl: result.image, status: result.status, species: result.species, gender: result.gender, origin: result.origin.name, location: result.location.name)
                     }, label: {
                         CharacterRowView(characterVM: characterVM, imageUrl: result.image, name: result.name, status: result.status, species: result.species, gender: result.gender)
                     })

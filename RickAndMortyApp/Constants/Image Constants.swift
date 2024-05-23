@@ -1,8 +1,9 @@
-//
-//  Image Constants.swift
-//  RickAndMortyApp
-//
-//  Created by Gabriel Lopes on 23/05/24.
-//
 
 import Foundation
+
+let imagesRickAndMorty = [
+    "image02",
+    "image03",
+    "image04",
+    "image05",
+]

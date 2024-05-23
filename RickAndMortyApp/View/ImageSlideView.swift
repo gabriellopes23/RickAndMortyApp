@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct ImageSlideView: View {
+    @State private var currentImageIndex = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(imagesRickAndMorty[currentImageIndex])
+            .resizable()
+            .scaledToFit()
+            .cornerRadius(25)
+            .padding(.horizontal, 5)
+            .onAppear {
+                startTime()
+            }
+    }
+    
+    func startTime() {
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+            withAnimation {
+                currentImageIndex = Int.random(in: 0..<imagesRickAndMorty.count)
+            }
+        }
     }
 }
 

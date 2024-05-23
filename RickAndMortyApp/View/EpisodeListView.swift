@@ -5,18 +5,22 @@ struct EpisodeListView: View {
     @StateObject var episodeVM: EpisodeViewModel = EpisodeViewModel()
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                ForEach(episodeVM.episodeModel.results.indices, id: \.self) { i in
-                        let result = episodeVM.episodeModel.results[i]
-                    
-                    EpisodeItemView(name: result.name, episode: result.episode)
-                        .frame(height: 80)
+        ZStack {
+            grayBackgroundColor.ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(episodeVM.episodeModel.results.indices, id: \.self) { i in
+                            let result = episodeVM.episodeModel.results[i]
+                        
+                        EpisodeItemView(name: result.name, episode: result.episode)
+                            .frame(height: 80)
+                    }
                 }
             }
+            .onAppear {
+                episodeVM.getEpisode()
         }
-        .onAppear {
-            episodeVM.getEpisode()
         }
     }
 }

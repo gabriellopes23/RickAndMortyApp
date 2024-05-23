@@ -30,6 +30,8 @@ struct MainView: View {
                             VStack(alignment: .leading) {
                                 TitleView()
                                 
+                                ImageSlideView()
+                                
                                 LocationListView(locationVM: locationVm)
                             }
                         }
@@ -64,6 +66,24 @@ struct MainView: View {
             }
              MenuView(selectedTab: $selectedTab)
         }
+         .gesture(
+            DragGesture()
+                .onEnded { value in
+                    if value.translation.width < -50 {
+                        withAnimation(.spring) {
+                            if selectedTab < 2 {
+                                selectedTab += 1
+                            }
+                        }
+                    } else if value.translation.width > 50 {
+                        withAnimation(.spring) {
+                            if selectedTab > 0 {
+                                selectedTab -= 1
+                            }
+                        }
+                    }
+                }
+         )
     }
 }
 
