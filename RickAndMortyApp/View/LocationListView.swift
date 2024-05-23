@@ -15,7 +15,7 @@ struct LocationListView: View {
                     let result = locationVM.locationModel.results[i]
                     
                     NavigationLink(destination: {
-                        
+                        LocationDetailView(locationVM: locationVM, residentsUrl: result.residents)
                     }, label: {
                         LocationItemView(name: result.name, type: result.type)
                     })
@@ -44,7 +44,6 @@ struct LocationItemView: View {
                 .foregroundStyle(.gray)
         }
         .padding()
-        .padding(.horizontal)
         .background(
             RoundedRectangle(cornerRadius: 30)
                 .fill(rowColorList)
@@ -53,33 +52,38 @@ struct LocationItemView: View {
     }
 }
 
-//struct LocationDetailView: View {
-//    @StateObject var locationVM: LocationViewModel = LocationViewModel()
-//    let columns = [
-//        GridItem(.adaptive(minimum: 200)),
-//        GridItem(.adaptive(minimum: 200)),
-//    ]
-//    
-//    let imageUrl: String
-//    
-//    var body: some View {
-//        ScrollView(showsIndicators: false) {
-//            LazyVGrid(columns: columns, spacing: 15) {
-//                ForEach(locationVM.locationModel.results[0].residents.indices, id: \.self) { i in
-//                    let residentes = locationVM.locationModel.results[0].residents[i]
-//                    
-//                    ImageUrl(imageUrl: residentes, width: 50, height: 50)
-//                }
-//            }
-//        }
-//    }
-//}
+struct LocationDetailView: View {
+    @ObservedObject var locationVM: LocationViewModel
+    let columns = [
+        GridItem(.adaptive(minimum: 200)),
+        GridItem(.adaptive(minimum: 200)),
+    ]
+    
+    let residentsUrl: [String]
+    
+    var body: some View {
+        ZStack {
+            grayBackgroundColor.ignoresSafeArea()
+            
+            ScrollView(showsIndicators: false) {
+                LazyVGrid(columns: columns, spacing: 15) {
+                    ForEach(locationVM.residents) { resident in
+                        ImageUrl(imageUrl: resident.image, width: 150, height: 150)
+                            .cornerRadius(20)
+                    }
+                }
+            }
+            .onAppear {
+                locationVM.getResidents(residentUrl: residentsUrl)
+        }
+        }
+    }
+}
 
 #Preview {
     ZStack {
         grayBackgroundColor.ignoresSafeArea()
+        
         LocationListView()
-//                LocationItemView(name: "Earth (C-137)", type: "Planet")
-//        LocationDetailView(imageUrl: "https://rickandmortyapi.com/api/character/38")
     }
 }
